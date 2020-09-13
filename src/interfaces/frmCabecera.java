@@ -521,24 +521,21 @@ public class frmCabecera extends javax.swing.JFrame {
             }
             
             FileWriter fw = new FileWriter(arch_soloNumFacts,true);
-            BufferedWriter bw = new BufferedWriter(fw); 
-            // PrintWriter escribe = new PrintWriter(bw);
-            
-            
-            
+            BufferedWriter bw = new BufferedWriter(fw);         
             cabecerasFact aux;                
             
             for (int i = 0; i < lstCabeceras.size(); i++) {
                 aux = lstCabeceras.get(i);
-                escribe.println("");
-                escribe.print(aux.getNumeroFactu());
-                escribe.print(" | "+aux.getFechaFact());
-                escribe.print(" | "+aux.getCliente());
-                escribe.println(" ");
+                
+                bw.write("");
+                bw.write(aux.getNumeroFactu());
+                bw.write(" | "+aux.getFechaFact());
+                bw.write(" | "+aux.getCliente());
+                bw.write(" ");
                     // aux.guardarSoloNumFacts(escribe);
                 // aux.guardarHoriz(escribe2);
                 }
-                escribe.close();    
+                bw.close();    
         } catch (IOException ioe){
             System.out.println("Exception occurred:");
             ioe.printStackTrace();
