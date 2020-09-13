@@ -559,55 +559,25 @@ public class frmDetalleFactura extends javax.swing.JFrame {
         ));
     }
     public void guardarDetFactEnArchPlano(){
-    
-        File archivo_plano_prods = new File (ubicacnArchPlano+"detalleFacturas.txt");
-        PrintWriter escribe;
-        
-        //comprobamos si existe el archivo sino creamos
-        if(!archivo_plano_prods.exists()){
-            try {
-                archivo_plano_prods.createNewFile();
-            } catch (Exception e) {
-            }
-        }
-        
-        try {
-            detalleFactura aux;
-            escribe = new PrintWriter(archivo_plano_prods,"utf-8");
-            //lstDetalleFact.add()
+
+        String archivo=ubicacnArchPlano+"detalleFacturas.txt";
+        detalleFactura aux;
             for (int i = 0; i < lstDetalleFact.size(); i++) {
                 aux = lstDetalleFact.get(i);
-                aux.guardarDetalleFact(escribe);
+                aux.guardarDetalleFact(archivo);
             }
-            escribe.close();          
-        } catch (Exception e) {
-        }
     };
      
      //NO VA BIEN MOSTRAR EN LA FORMA ACTUAL ESTOS DATOS 
       public void guardDetFactHorizArchPlano(){
-    
-        File archivo_plano_prods = new File (ubicacnArchPlano+"facturasHoriz.txt");
-        PrintWriter escribe;
-        
-        //comprobamos si existe el archivo sino creamos
-        if(!archivo_plano_prods.exists()){
-            try {
-                archivo_plano_prods.createNewFile();
-            } catch (Exception e) {
-            }
-        }
-        
-        try {
+        String archivo=ubicacnArchPlano+"facturasHoriz.txt";
             detalleFactura aux;
-            escribe = new PrintWriter(archivo_plano_prods,"utf-8");
+           
             for (int i = 0; i < lstDetalleFact.size(); i++) {
                 aux = lstDetalleFact.get(i);
-                aux.guardarFactHoriz(escribe);
-            }
-            escribe.close();          
-        } catch (Exception e) {
-        }
+                aux.guardarFactHoriz(archivo);
+            }          
+      
     };
 
 

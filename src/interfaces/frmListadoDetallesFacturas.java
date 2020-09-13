@@ -35,7 +35,7 @@ private String ubicacnArchPlano = System.getProperty("user.dir")+"\\DatosAplicac
             //Lectura Fichero
             String linea = "";
             
-            modelTabla.addColumn("Cabeceras Registradas");
+            modelTabla.addColumn("Detalles de Factura Registrados");
             
             //Bucle mientras existan filas sacar datos
             while ((linea = br.readLine()) != null) {                

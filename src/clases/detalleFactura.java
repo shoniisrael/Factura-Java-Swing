@@ -3,6 +3,13 @@ package clases;
 
 import java.io.PrintWriter;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 
 public class detalleFactura {
     
@@ -78,23 +85,56 @@ public class detalleFactura {
     
     
 
-    public void guardarDetalleFact(PrintWriter escribe) {
-       
-        escribe.println("--------------------");
-        escribe.println(numFactura);
-        escribe.println(" "+producto);
-        escribe.println(" "+cantidadVenta);
-        escribe.println(" "+subtotal);
-        escribe.println("--------------------");
+    public void guardarDetalleFact(String archivo) {
+
+        try {
+            File archivo_plano = new File (archivo);
+
+            if(!archivo_plano.exists() ){//|| !archivo_plano_horiz.exists()){
+                
+                archivo_plano.createNewFile();           
+            }
+            
+            FileWriter fw = new FileWriter(archivo_plano,true);
+            BufferedWriter bw = new BufferedWriter(fw);    
+            PrintWriter escribe = new PrintWriter(bw);
+            
+            escribe.println("--------------------");
+            escribe.println(this.numFactura);
+            escribe.println(" "+this.producto);
+            escribe.println(" "+this.cantidadVenta);
+            escribe.println(" "+this.subtotal);
+            escribe.println("--------------------");
+            escribe.close();    
+        } catch (IOException ioe){
+            System.out.println("Exception occurred:");
+            ioe.printStackTrace();
+        }
     }
     
-    public void guardarFactHoriz(PrintWriter escribe) {
+    public void guardarFactHoriz(String archivo) {
        
-        escribe.print(numFactura);
-        escribe.print(" | "+producto);
-        escribe.print(" | "+cantidadVenta);
-        escribe.print(" | "+subtotal);
-        escribe.println(" ");
+        try {
+            File archivo_plano = new File (archivo);
+
+            if(!archivo_plano.exists() ){//|| !archivo_plano_horiz.exists()){
+                
+                archivo_plano.createNewFile();           
+            }
+            
+            FileWriter fw = new FileWriter(archivo_plano,true);
+            BufferedWriter bw = new BufferedWriter(fw);    
+            PrintWriter escribe = new PrintWriter(bw);            
+            escribe.print(numFactura);
+            escribe.print(" | "+producto);
+            escribe.print(" | "+cantidadVenta);
+            escribe.print(" | "+subtotal);
+            escribe.println(" ");
+            escribe.close();    
+        } catch (IOException ioe){
+            System.out.println("Exception occurred:");
+            ioe.printStackTrace();
+        }
     }
    
 }
