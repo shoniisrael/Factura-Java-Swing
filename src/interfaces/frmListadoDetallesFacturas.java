@@ -35,11 +35,23 @@ private String ubicacnArchPlano = System.getProperty("user.dir")+"\\DatosAplicac
             //Lectura Fichero
             String linea = "";
             
-            modelTabla.addColumn("Detalles de Factura Registrados");
+            modelTabla.addColumn("Factura");
+            modelTabla.addColumn("Producto");
+            modelTabla.addColumn("Cod. Producto");
+            modelTabla.addColumn("Valor");
+            modelTabla.addColumn("Cantidad");
+            modelTabla.addColumn("Precio Unitario");
+            
             
             //Bucle mientras existan filas sacar datos
             while ((linea = br.readLine()) != null) {                
-                modelTabla.addRow(new String[]{linea});
+                String[]  aux_linea=linea.split("\\|",6);     
+                float a = Float.parseFloat(aux_linea[4]);   
+                float b = Float.parseFloat(aux_linea[5]);   
+                float c=a*b;
+                aux_linea[3]= String.valueOf(c);
+
+                modelTabla.addRow(aux_linea);
             }
             
            //Cargo datos a la tabla 

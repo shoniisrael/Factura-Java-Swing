@@ -42,11 +42,7 @@ public class frmListadoCabeceras extends javax.swing.JFrame {
             
             //Bucle mientras existan filas sacar datos
             while ((linea = br.readLine()) != null) {                
-                String[]  aux_linea=linea.split("\\|",3);
-                System.out.println("");
-                System.out.println(aux_linea[0]);
-                System.out.println(aux_linea[1]);
-                System.out.println(aux_linea[2]);
+                String[]  aux_linea=linea.split("\\|",3);               
                 modelTabla.addRow(aux_linea);
             }
             
