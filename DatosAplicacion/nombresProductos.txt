@@ -1,0 +1,2 @@
+ IPHONE 5  |   PROD001  |  2100.0
+IPHONE X  |  PROD2  |  2100.0
