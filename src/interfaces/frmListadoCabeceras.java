@@ -36,16 +36,23 @@ public class frmListadoCabeceras extends javax.swing.JFrame {
             //Lectura Fichero
             String linea = "";
             
-            modelTabla.addColumn("Cabeceras Registradas");
+            modelTabla.addColumn("N° Factura");
+            modelTabla.addColumn("Fecha");
+            modelTabla.addColumn("Cliente");
             
             //Bucle mientras existan filas sacar datos
             while ((linea = br.readLine()) != null) {                
-//                System.out.println(linea);
-                modelTabla.addRow(new String[]{linea});
+                String[]  aux_linea=linea.split("\\|",3);
+                System.out.println("");
+                System.out.println(aux_linea[0]);
+                System.out.println(aux_linea[1]);
+                System.out.println(aux_linea[2]);
+                modelTabla.addRow(aux_linea);
             }
             
            //Cargo datos a la tabla 
            jtblCabeceras.setModel(modelTabla);
+     
         } catch (IOException e) {
         }
 
@@ -84,13 +91,13 @@ public class frmListadoCabeceras extends javax.swing.JFrame {
 
         jtblCabeceras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "N° Factura", "Fecha", "Cliente"
             }
         ));
         jScrollPane1.setViewportView(jtblCabeceras);
@@ -387,6 +394,6 @@ public class frmListadoCabeceras extends javax.swing.JFrame {
     private javax.swing.JTable jtblCabeceras;
     private javax.swing.JMenuItem mitmListadoClientes;
     private javax.swing.JMenuItem mitmListadoProductos;
-    private javax.swing.JMenuItem mitmRegistroProductos;
+    private javax.swing.JMenuItem mitmRegistroProductos;    
     // End of variables declaration//GEN-END:variables
 }
