@@ -485,28 +485,32 @@ public class frmCabecera extends javax.swing.JFrame {
     }
 
      public void guardarCabecEnArchPlano(){
-    
-        File archivo_plano_prods = new File (ubicacnArchPlano+"cabeceras.txt");
-        PrintWriter escribe;
-        
-        //comprobamos si existe el archivo sino creamos
-        if(!archivo_plano_prods.exists()){
-            try {
-                archivo_plano_prods.createNewFile();
-            } catch (Exception e) {
-            }
-        }
-        
         try {
-            cabecerasFact aux;
-            escribe = new PrintWriter(archivo_plano_prods,"utf-8");
-            for (int i = 0; i < lstCabeceras.size(); i++) {
-                aux = lstCabeceras.get(i);
-                aux.guardar(escribe);
+            File archivo_plano_prods = new File (ubicacnArchPlano+"cabeceras.txt");
+
+            if(!archivo_plano_prods.exists() ){//|| !archivo_plano_horiz.exists()){
+                
+                archivo_plano_prods.createNewFile();           
             }
-            escribe.close();
             
-        } catch (Exception e) {
+            FileWriter fw = new FileWriter(archivo_plano_prods,true);
+            BufferedWriter bw = new BufferedWriter(fw);    
+            PrintWriter escribe = new PrintWriter(bw);     
+            cabecerasFact aux;                
+            
+            for (int i = 0; i < lstCabeceras.size(); i++) {
+                aux = lstCabeceras.get(i);               
+                escribe.println("--------------------");
+                escribe.println(""+aux.getNumeroFactu());
+                escribe.println(""+aux.getFechaFact());
+                escribe.println(""+aux.getCliente());
+                escribe.println("--------------------");
+               
+                }
+                escribe.close();    
+        } catch (IOException ioe){
+            System.out.println("Exception occurred:");
+            ioe.printStackTrace();
         }
     };
      
@@ -521,21 +525,18 @@ public class frmCabecera extends javax.swing.JFrame {
             }
             
             FileWriter fw = new FileWriter(arch_soloNumFacts,true);
-            BufferedWriter bw = new BufferedWriter(fw);         
+            BufferedWriter bw = new BufferedWriter(fw);   
+            PrintWriter escribe = new PrintWriter(bw);
             cabecerasFact aux;                
             
             for (int i = 0; i < lstCabeceras.size(); i++) {
                 aux = lstCabeceras.get(i);
-                
-                bw.write("");
-                bw.write(aux.getNumeroFactu());
-                bw.write(" | "+aux.getFechaFact());
-                bw.write(" | "+aux.getCliente());
-                bw.write(" ");
+                escribe.print(aux.getNumeroFactu());
+                escribe.println();
                     // aux.guardarSoloNumFacts(escribe);
                 // aux.guardarHoriz(escribe2);
                 }
-                bw.close();    
+                escribe.close();    
         } catch (IOException ioe){
             System.out.println("Exception occurred:");
             ioe.printStackTrace();
@@ -543,28 +544,33 @@ public class frmCabecera extends javax.swing.JFrame {
     }
     
       public void guardarCabeHorizArchPlano(){
-    
-        File archivo_plano_cabec = new File (ubicacnArchPlano+"cabecerasHoriz.txt");
-        PrintWriter escribe;
-        
-        //comprobamos si existe el archivo sino creamos
-        if(!archivo_plano_cabec.exists()){
-            try {
-                archivo_plano_cabec.createNewFile();
-            } catch (Exception e) {
-            }
-        }
-        
         try {
-            cabecerasFact aux;
-            escribe = new PrintWriter(archivo_plano_cabec,"utf-8");
+            File archivo_plano_cabec = new File (ubicacnArchPlano+"cabecerasHoriz.txt");
+
+            if(!archivo_plano_cabec.exists() ){//|| !archivo_plano_horiz.exists()){
+                
+                archivo_plano_cabec.createNewFile();           
+            }
+            
+            FileWriter fw = new FileWriter(archivo_plano_cabec,true);
+            BufferedWriter bw = new BufferedWriter(fw);      
+            PrintWriter escribe = new PrintWriter(bw);   
+            cabecerasFact aux;                
+            
             for (int i = 0; i < lstCabeceras.size(); i++) {
                 aux = lstCabeceras.get(i);
-                aux.guardarHoriz(escribe);
-            }
-            escribe.close();
-            
-        } catch (Exception e) {
+                escribe.print(aux.getNumeroFactu());
+                escribe.print(" | "+aux.getFechaFact());
+                escribe.print(" | "+aux.getCliente());
+                escribe.println(" ");
+              
+                    // aux.guardarSoloNumFacts(escribe);
+                // aux.guardarHoriz(escribe2);
+                }
+                escribe.close();    
+        } catch (IOException ioe){
+            System.out.println("Exception occurred:");
+            ioe.printStackTrace();
         }
     };
      
