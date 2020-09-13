@@ -1,5 +1,0 @@
- IPHONE 5  |   PROD001  |  2100.0
-IPHONE X  |  PROD2  |  2100.0
-huawei P10  |  1  |  250.0
- Huawei P20  |  2  |  256.0
-Huawei P30  |  3  |  45.0
