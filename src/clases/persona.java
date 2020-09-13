@@ -1,6 +1,13 @@
 package clases;
 
 import java.io.PrintWriter;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 
 public class persona {
     
@@ -61,18 +68,49 @@ public class persona {
         this.telefono = telefono;
     }
 
-    public void guardar(PrintWriter escribe) {
-        escribe.print(codigoPer);
-        escribe.print(" | "+cedula);
-        escribe.print(" | "+nombre);
-        escribe.print(" | "+direccion);
-        escribe.print(" | "+telefono);
-        escribe.println();
+    public void guardar(String archivo) {
+        try {
+            File archivo_plano = new File (archivo);
+
+            if(!archivo_plano.exists() )
+            {
+                archivo_plano.createNewFile();           
+            }
+            
+            FileWriter fw = new FileWriter(archivo_plano,true);
+            BufferedWriter bw = new BufferedWriter(fw);    
+            PrintWriter escribe = new PrintWriter(bw);
+            escribe.print(this.codigoPer);
+            escribe.print(" | "+this.cedula);
+            escribe.print(" | "+this.nombre);
+            escribe.print(" | "+this.direccion);
+            escribe.print(" | "+this.telefono);
+            escribe.println();
+            escribe.close();    
+        } catch (IOException ioe){
+            System.out.println("Exception occurred:");
+            ioe.printStackTrace();
+        }
     }
     
-     public void guardarSoloNombresClientes (PrintWriter escribe) {
-        escribe.print(nombre);
-        escribe.println();
+     public void guardarSoloNombresClientes (String archivo) {
+        try {
+            File archivo_plano = new File (archivo);
+
+            if(!archivo_plano.exists() ){
+               archivo_plano.createNewFile();           
+            }
+            
+            FileWriter fw = new FileWriter(archivo_plano,true);
+            BufferedWriter bw = new BufferedWriter(fw);    
+            PrintWriter escribe = new PrintWriter(bw);
+            escribe.print(this.nombre);
+            escribe.println();
+            escribe.close();    
+        } catch (IOException ioe){
+            System.out.println("Exception occurred:");
+            ioe.printStackTrace();
+        }
     }
     
 }

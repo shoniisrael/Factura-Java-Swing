@@ -625,52 +625,22 @@ public class frmRegistroClientes extends javax.swing.JFrame {
         ));
     }
      
-    public void guardarProdsEnArchPlano(){
-    
-        File archivo_plano_persons = new File (rutaArchPlano+"personas.txt");
-        PrintWriter escribe;
-       
-        //comprobamos si existe el archivo sino creamos
-        if(!archivo_plano_persons.exists()){
-            try {
-                archivo_plano_persons.createNewFile();
-            } catch (Exception e) {
-            }
-        }
-        
-        try {
-            persona aux;
-            escribe = new PrintWriter(archivo_plano_persons,"utf-8");
+    public void guardarProdsEnArchPlano(){   
+        String archivo=rutaArchPlano+"personas.txt";
+        persona aux;
             for (int i = 0; i < lstPersona.size(); i++) {
                 aux = lstPersona.get(i);
-                aux.guardar(escribe);
+                aux.guardar(archivo);
             }
-            escribe.close(); //
-        } catch (Exception e) {
-        }
     };
        
-    public void guardarNombreClientsArchPlano(){
-    
-         File arch_soloClients = new File (rutaArchPlano+"nombresPersonas.txt");
-        PrintWriter escribe;
-        
-         if(!arch_soloClients.exists()){
-            try {
-                arch_soloClients.createNewFile();
-            } catch (Exception e) {
-            }
-        }
-        try {
-            persona aux;
-            escribe = new PrintWriter(arch_soloClients,"utf-8");
+    public void guardarNombreClientsArchPlano(){           
+        String archivo=rutaArchPlano+"nombresPersonas.txt";
+        persona aux;
             for (int i = 0; i < lstPersona.size(); i++) {
                 aux = lstPersona.get(i);
-                aux.guardarSoloNombresClientes(escribe);
+                aux.guardarSoloNombresClientes(archivo);
             }
-            escribe.close();
-        } catch (Exception e) {
-        }
     }
     
     public static void main(String args[]) {

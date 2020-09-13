@@ -1,6 +1,13 @@
 package clases;
 
 import java.io.PrintWriter;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 
 public class producto {
     
@@ -65,20 +72,51 @@ public class producto {
     
     
 
-    public void guardar(PrintWriter escribe) {
-        escribe.print(" "+codigoProd);
-        escribe.print(" | "+nombreProd);
-        escribe.print(" | "+referenciaProd+" ");
-        escribe.print(" | "+stockProd);
-        escribe.print(" | "+precioProd);
-        escribe.println();
+    public void guardar(String archivo) {
+        try {
+            File archivo_plano = new File (archivo);
+
+            if(!archivo_plano.exists() )
+            {
+                archivo_plano.createNewFile();           
+            }            
+            FileWriter fw = new FileWriter(archivo_plano,true);
+            BufferedWriter bw = new BufferedWriter(fw);    
+            PrintWriter escribe = new PrintWriter(bw);
+            escribe.print(" "+this.codigoProd);
+            escribe.print(" | "+this.nombreProd);
+            escribe.print(" | "+this.referenciaProd+" ");
+            escribe.print(" | "+this.stockProd);
+            escribe.print(" | "+this.precioProd);
+            escribe.println();
+            escribe.close();    
+        } catch (IOException ioe){
+            System.out.println("Exception occurred:");
+            ioe.printStackTrace();
+        }
     }
 
-    public void guardarSoloNombres(PrintWriter escribe) { 
-       escribe.print(nombreProd);
-       escribe.print("  |  "+codigoProd);
-       escribe.print("  |  "+precioProd);
-       escribe.println();
+    public void guardarSoloNombres(String archivo) { 
+       
+       try {
+        File archivo_plano = new File (archivo);
+
+        if(!archivo_plano.exists() )
+        {
+            archivo_plano.createNewFile();           
+        }            
+        FileWriter fw = new FileWriter(archivo_plano,true);
+        BufferedWriter bw = new BufferedWriter(fw);    
+        PrintWriter escribe = new PrintWriter(bw);
+        escribe.print(this.nombreProd);
+        escribe.print("  |  "+this.codigoProd);
+        escribe.print("  |  "+this.precioProd);
+        escribe.println();
+        escribe.close();    
+    } catch (IOException ioe){
+        System.out.println("Exception occurred:");
+        ioe.printStackTrace();
+    }
     }
     
 }

@@ -90,7 +90,8 @@ public class detalleFactura {
         try {
             File archivo_plano = new File (archivo);
 
-            if(!archivo_plano.exists() ){//|| !archivo_plano_horiz.exists()){
+            if(!archivo_plano.exists() ){
+               
                 
                 archivo_plano.createNewFile();           
             }
@@ -117,7 +118,8 @@ public class detalleFactura {
         try {
             File archivo_plano = new File (archivo);
 
-            if(!archivo_plano.exists() ){//|| !archivo_plano_horiz.exists()){
+            if(!archivo_plano.exists() ){
+                
                 
                 archivo_plano.createNewFile();           
             }

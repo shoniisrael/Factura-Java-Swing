@@ -576,50 +576,21 @@ public class frmRegistroProductos extends javax.swing.JFrame {
     }
     
     public void guardarProdsEnArchPlano(){
-        File archivo_plano_prods = new File (rutaArchPlano+"productos.txt");
-        PrintWriter escribe;
-        
-        //comprobamos si existe el archivo sino creamos
-        if(!archivo_plano_prods.exists()){
-            try {
-                archivo_plano_prods.createNewFile();
-            } catch (Exception e) {
-            }
-        }
-        
-        try {
-            producto aux;
-            escribe = new PrintWriter(archivo_plano_prods,"utf-8");
+        String archivo=rutaArchPlano+"productos.txt";
+        producto aux;
             for (int i = 0; i < lstProductos.size(); i++) {
                 aux = lstProductos.get(i);
-                aux.guardar(escribe);
+                aux.guardar(archivo);
             }
-            escribe.close();
-        } catch (Exception e) {
-        }
     };
     
     public void guardarSoloProdsArchPlano(){
-        File arch_soloProds = new File (rutaArchPlano+"nombresProductos.txt");
-        PrintWriter escribe;
-        
-         if(!arch_soloProds.exists()){
-            try {
-                arch_soloProds.createNewFile();
-            } catch (Exception e) {
-            }
-        }
-        try {
-            producto aux;
-            escribe = new PrintWriter(arch_soloProds,"utf-8");
+        String archivo=rutaArchPlano+"nombresProductos.txt";
+        producto aux;
             for (int i = 0; i < lstProductos.size(); i++) {
                 aux = lstProductos.get(i);
-                aux.guardarSoloNombres(escribe);
+                aux.guardarSoloNombres(archivo);
             }
-           escribe.close();
-            
-        } catch (Exception e) {
-        }
     }
     
     public static void main(String args[]) {
