@@ -58,7 +58,7 @@ public class frmCabecera extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtNumFact = new javax.swing.JTextField();
         txtFecha = new javax.swing.JTextField();
-        cmbClientesCab = new javax.swing.JComboBox<>();
+        cmbClientesCab = new javax.swing.JComboBox<String>();
         btnGuardarCabecera = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -116,7 +116,15 @@ public class frmCabecera extends javax.swing.JFrame {
             }
         });
 
-        cmbClientesCab.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un cliente" }));
+        cmbClientesCab.setEditable(true);
+        cmbClientesCab.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "Seleccione un cliente" }));
+        cmbClientesCab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                // cmbClientesCabActionPerformed(evt);
+                // AutoCompletion.enable(cmbClientesCab);
+            }
+        });
+
 
         btnGuardarCabecera.setText("Guardar Cabecera");
         btnGuardarCabecera.addActionListener(new java.awt.event.ActionListener() {
@@ -124,7 +132,6 @@ public class frmCabecera extends javax.swing.JFrame {
                 btnGuardarCabeceraActionPerformed(evt);
             }
         });
-
         jButton2.setText("Salir");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
