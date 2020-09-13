@@ -38,11 +38,16 @@ public class frmListadoClientes extends javax.swing.JFrame {
             String linea = "" ;
             
             //Defino un modelo de tabla nuevo
-            modelTabla.addColumn("Clientes Registrados");
+            modelTabla.addColumn("Codigo");
+            modelTabla.addColumn("Cedula");
+            modelTabla.addColumn("Nombre");
+            modelTabla.addColumn("Direccion");
+            modelTabla.addColumn("Telefono");
             
             //Bucle mientras existan filas sacar datos
             while ( (linea = br.readLine()) != null) {                
-                modelTabla.addRow(new String[]{linea});
+                String[]  aux_linea=linea.split("\\|",5);               
+                modelTabla.addRow(aux_linea);
             }
             
            //Cargo datos a la tabla 
