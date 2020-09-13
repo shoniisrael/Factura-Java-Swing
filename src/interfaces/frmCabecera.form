@@ -259,6 +259,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtNumFact">
       <Properties>
+        <Property name="editable" type="boolean" value="false"/>
         <Property name="text" type="java.lang.String" value="Ingrese n&#xfa;mero de factura"/>
       </Properties>
       <Events>

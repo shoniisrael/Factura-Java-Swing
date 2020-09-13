@@ -45,6 +45,27 @@ public class frmCabecera extends javax.swing.JFrame {
             
         } catch (IOException e) {
         }
+        int num_fact=0;
+        try {
+            //Lectura del archivo plano
+            File archivo_plano2 = new File (ubicacnArchPlano+"cabecerasHoriz.txt");
+            FileReader fr2 = new FileReader(archivo_plano2);
+            
+            //Para leer archivo plano con read line
+            BufferedReader  br2 = new BufferedReader(fr2);
+            
+            //Lectura Fichero
+            String linea2 = "";
+            
+            
+            //Bucle mientras existan filas sacar datos
+            while ((linea2 = br2.readLine()) != null) {                
+                num_fact++;                
+            }
+            num_fact++;
+            txtNumFact.setText(String.valueOf(num_fact));
+        } catch (IOException e) {
+        }
     }
     
     @SuppressWarnings("unchecked")
@@ -96,6 +117,7 @@ public class frmCabecera extends javax.swing.JFrame {
 
         jLabel5.setText("Fecha:");
 
+        txtNumFact.setEditable(false);
         txtNumFact.setText("Ingrese número de factura");
         txtNumFact.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -117,14 +139,12 @@ public class frmCabecera extends javax.swing.JFrame {
         });
 
         cmbClientesCab.setEditable(true);
-        cmbClientesCab.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "Seleccione un cliente" }));
+        cmbClientesCab.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione un cliente" }));
         cmbClientesCab.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                // cmbClientesCabActionPerformed(evt);
-                // AutoCompletion.enable(cmbClientesCab);
+                cmbClientesCabActionPerformed(evt);
             }
         });
-
 
         btnGuardarCabecera.setText("Guardar Cabecera");
         btnGuardarCabecera.addActionListener(new java.awt.event.ActionListener() {
@@ -132,6 +152,7 @@ public class frmCabecera extends javax.swing.JFrame {
                 btnGuardarCabeceraActionPerformed(evt);
             }
         });
+
         jButton2.setText("Salir");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -341,6 +362,11 @@ public class frmCabecera extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    
+    private void cmbClientesCabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        System.out.println("cambio");
+    }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         System.exit(WIDTH);
