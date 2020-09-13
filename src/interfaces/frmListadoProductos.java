@@ -37,12 +37,17 @@ public class frmListadoProductos extends javax.swing.JFrame {
             //Lectura Fichero
             String linea = "";
             
-            modelTabla.addColumn("Productos Registrados");
+            modelTabla.addColumn("Codigo");
+            modelTabla.addColumn("Producto");
+            modelTabla.addColumn("Alias Producto");
+            modelTabla.addColumn("Stock");
+            modelTabla.addColumn("Precio");
+
             
             //Bucle mientras existan filas sacar datos
             while ((linea = br.readLine()) != null) {                
-            //  System.out.println(linea);
-                modelTabla.addRow(new String[]{linea});
+                String[]  aux_linea=linea.split("\\|",5);               
+                modelTabla.addRow(aux_linea);
             }
             
            //Cargo datos a la tabla 
