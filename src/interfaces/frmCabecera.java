@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 
 
 public class frmCabecera extends javax.swing.JFrame {
@@ -509,29 +511,37 @@ public class frmCabecera extends javax.swing.JFrame {
     };
      
      public void guardSoloNumFactArchPlano(){
-    
-        File arch_soloNumFacts = new File (ubicacnArchPlano+"numerosFacturas.txt");
-       // File archivo_plano_horiz = new File (ubicacnArchPlano+"productosHoriz.txt");
-        PrintWriter escribe, escribe2;
-        
-         if(!arch_soloNumFacts.exists() ){//|| !archivo_plano_horiz.exists()){
-            try {
-                arch_soloNumFacts.createNewFile();
-                //archivo_plano_horiz.createNewFile();
-            } catch (Exception e) {
-            }
-        }
+        //  String archivo=ubicacnArchPlano+"numerosFacturas.txt";
         try {
-            cabecerasFact aux;
-            escribe = new PrintWriter(arch_soloNumFacts,"utf-8");
-            //escribe2 = new PrintWriter(archivo_plano_horiz,"utf-8");
+            File arch_soloNumFacts = new File (ubicacnArchPlano+"numerosFacturas.txt");
+
+            if(!arch_soloNumFacts.exists() ){//|| !archivo_plano_horiz.exists()){
+                
+                        arch_soloNumFacts.createNewFile();           
+            }
+            
+            FileWriter fw = new FileWriter(arch_soloNumFacts,true);
+            BufferedWriter bw = new BufferedWriter(fw); 
+            // PrintWriter escribe = new PrintWriter(bw);
+            
+            
+            
+            cabecerasFact aux;                
+            
             for (int i = 0; i < lstCabeceras.size(); i++) {
                 aux = lstCabeceras.get(i);
-                aux.guardarSoloNumFacts(escribe);
-               // aux.guardarHoriz(escribe2);
-            }
-            escribe.close();
-        } catch (Exception e) {
+                escribe.println("");
+                escribe.print(aux.getNumeroFactu());
+                escribe.print(" | "+aux.getFechaFact());
+                escribe.print(" | "+aux.getCliente());
+                escribe.println(" ");
+                    // aux.guardarSoloNumFacts(escribe);
+                // aux.guardarHoriz(escribe2);
+                }
+                escribe.close();    
+        } catch (IOException ioe){
+            System.out.println("Exception occurred:");
+            ioe.printStackTrace();
         }
     }
     
