@@ -441,7 +441,50 @@ public void leerProductos(){
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnGuardarDetFactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarDetFactActionPerformed
-         try {
+         
+            detalleFactura aux;
+            for (int i = 0; i < lstDetalleFact.size(); i++) {
+                aux = lstDetalleFact.get(i);
+                String producto=aux.getProducto();
+                int cat_producto=aux.getCantidadVenta();
+                try {
+                    //Lectura del archivo plano
+                    File archivo_plano = new File (ubicacnArchPlano+"productos.txt");
+        
+                    FileReader fr = new FileReader(archivo_plano);
+                    
+                    //Para leer archivo plano con read line
+                    BufferedReader  br = new BufferedReader(fr);
+                    
+                    
+                    //Variablr para Lectura Fichero
+                    String linea = "";            
+                    int intIndex =0;
+                    
+                    String s2 ="";
+                    String[] aux_producto=producto.split("\\|",3);     
+                   
+                    while ((linea = br.readLine()) != null) {                
+                        String[]  aux_linea=linea.split("\\|",6);     
+                        if(aux_linea[1]==aux_producto[0]){
+                            System.out.println("se encontro producto");
+                        }
+                       
+        
+                    }
+                    
+                           
+                } catch (IOException e) {
+                }
+
+
+
+
+
+
+
+        }
+        try {
             guardarDetFactEnArchPlano();
             guardDetFactHorizArchPlano();
             JOptionPane.showMessageDialog(null, "Clientes guardados en la DB");
