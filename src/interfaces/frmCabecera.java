@@ -10,13 +10,57 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
+import javax.swing.text.JTextComponent;
 
 
 public class frmCabecera extends javax.swing.JFrame {
 
     private ArrayList<cabecerasFact> lstCabeceras = new ArrayList<cabecerasFact>();
     private String ubicacnArchPlano = System.getProperty("user.dir")+"\\DatosAplicacion\\";
-    
+    public void leerClientes(String texto){
+            try {
+                    //Lectura del archivo plano
+                    File archivo_plano = new File (ubicacnArchPlano+"nombresPersonas.txt");
+                    FileReader fr = new FileReader(archivo_plano);
+                    
+                    //Para leer archivo plano con read line
+                    BufferedReader  br = new BufferedReader(fr);
+                    
+                    //Lectura Fichero
+                    String linea = "";
+                    cmbClientesCab.removeAllItems();
+                    // for(int i=cmbClientesCab.getItemCount()-1;i>=0;i--){
+                    //     cmbClientesCab.removeItemAt(i);
+                    // }
+                    // String[] nombres;
+                    int intIndex =0;
+                    while ((linea = br.readLine()) != null) {                
+                        intIndex = linea.indexOf(texto);
+                        if(intIndex>=0){
+                            cmbClientesCab.addItem(linea);
+                        }  
+                                               
+                    }
+                    
+                } catch (IOException e) {
+                }
+    }
+    public void leerClientes(){
+           
+                   
+                    cmbClientesCab.removeAllItems();
+                    // for(int i=cmbClientesCab.getItemCount()-1;i>=0;i--){
+                    //     cmbClientesCab.removeItemAt(i);
+                    // }
+                    // while ((linea = br.readLine()) != null) {                
+                    
+                    //         cmbClientesCab.addItem(linea);
+                    
+                    // }
+                    
+                
+    }
+
     public frmCabecera() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -24,27 +68,8 @@ public class frmCabecera extends javax.swing.JFrame {
         //Desactivamos botones 
         btnNuevaCabecera.setEnabled(false);
         btnGuardarCabecera.setEnabled(false);
-        
-        try {
-            //Lectura del archivo plano
-            File archivo_plano = new File (ubicacnArchPlano+"nombresPersonas.txt");
-            FileReader fr = new FileReader(archivo_plano);
-            
-            //Para leer archivo plano con read line
-            BufferedReader  br = new BufferedReader(fr);
-            
-            //Lectura Fichero
-            String linea = "";
-            
-            
-            //Bucle mientras existan filas sacar datos
-            while ((linea = br.readLine()) != null) {                
-                System.out.println(linea);
-                cmbClientesCab.addItem(linea);
-            }
-            
-        } catch (IOException e) {
-        }
+        this.leerClientes();
+       
         int num_fact=0;
         try {
             //Lectura del archivo plano
@@ -364,8 +389,32 @@ public class frmCabecera extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    private void cmbClientesCabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        System.out.println("cambio");
+    private void cmbClientesCabActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        System.out.println(cmbClientesCab.getEditor().toString());
+        
+        JTextComponent editor = (JTextComponent) cmbClientesCab.getEditor().getEditorComponent();
+        
+        this.leerClientes(editor.getText());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
