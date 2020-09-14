@@ -54,21 +54,6 @@ public class frmDetalleFactura extends javax.swing.JFrame {
         }
                
 }
-public void leerProductos(){
-       
-               
-    cbmProducto.removeAllItems();
-                // for(int i=cmbClientesCab.getItemCount()-1;i>=0;i--){
-                //     cmbClientesCab.removeItemAt(i);
-                // }
-                // while ((linea = br.readLine()) != null) {                
-                
-                //         cmbClientesCab.addItem(linea);
-                
-                // }
-                
-            
-}
     public frmDetalleFactura() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -82,7 +67,7 @@ public void leerProductos(){
         txtIva.setEnabled(false);
         txtTotal.setEnabled(false);
         
-        this.leerProductos();
+        this.leerProductos("");
         try {
             //Lectura del archivo plano
             File archivo_plano_facts = new File (ubicacnArchPlano+"numerosFacturas.txt");
@@ -129,6 +114,7 @@ public void leerProductos(){
         txtPrecioFinal = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtIva = new javax.swing.JTextField();
+        button1 = new java.awt.Button();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
@@ -175,11 +161,6 @@ public void leerProductos(){
 
         cbmProducto.setEditable(true);
         cbmProducto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione un producto" }));
-        cbmProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbmProductoActionPerformed(evt);
-            }
-        });
 
         txtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -234,6 +215,13 @@ public void leerProductos(){
         jLabel8.setText("IVA:");
 
         txtIva.setText("0.00");
+
+        button1.setLabel("Buscar");
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
 
         jMenu3.setText("Archivo");
 
@@ -359,17 +347,16 @@ public void leerProductos(){
                                     .addComponent(jLabel7))
                                 .addGap(27, 27, 27)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtCantidad, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                                            .addComponent(txtPrecioFinal))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnAgregarDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(cbmNumFac, 0, 300, Short.MAX_VALUE)
-                                            .addComponent(cbmProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(0, 0, Short.MAX_VALUE))))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtCantidad, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                                        .addComponent(txtPrecioFinal))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(cbmNumFac, 0, 256, Short.MAX_VALUE)
+                                        .addComponent(cbmProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnAgregarDetalle, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+                                    .addComponent(button1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(455, 455, 455))
@@ -398,10 +385,12 @@ public void leerProductos(){
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(cbmNumFac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(cbmProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(cbmProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -463,10 +452,11 @@ public void leerProductos(){
                     
                     String s2 ="";
                     String[] aux_producto=producto.split("\\|",3);     
-                   
-                    while ((linea = br.readLine()) != null) {                
+                    System.out.println(aux_producto[0]);
+                    while ((linea = br.readLine()) != null) {  
                         String[]  aux_linea=linea.split("\\|",6);     
-                        if(aux_linea[1]==aux_producto[0]){
+                        System.out.println(aux_linea[1]);
+                        if(aux_linea[1].replace(" ","")==aux_producto[0].replace(" ","")){
                             System.out.println("se encontro producto");
                         }
                        
@@ -581,9 +571,9 @@ public void leerProductos(){
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void cbmProductoActionPerformed(java.awt.event.ActionEvent evt) {  
-        JTextComponent editor = (JTextComponent) cbmProducto.getEditor().getEditorComponent();
-        System.out.println(editor.getText());
-        this.leerProductos(editor.getText());
+        // JTextComponent editor = (JTextComponent) cbmProducto.getEditor().getEditorComponent();
+        // System.out.println(editor.getText());
+        // this.leerProductos(editor.getText());
     }
 
     private void btnNuevoDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoDetalleActionPerformed
@@ -623,6 +613,12 @@ public void leerProductos(){
             txtPrecioFinal.setText("");
         }
     }//GEN-LAST:event_txtPrecioFinalKeyTyped
+
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        JTextComponent editor = (JTextComponent) cbmProducto.getEditor().getEditorComponent();
+        System.out.println(editor.getText());
+        this.leerProductos(editor.getText());
+    }//GEN-LAST:event_button1ActionPerformed
 
      public void mostrarDetallesFact(){
         String[][] matrDetallesFact = new String[lstDetalleFact.size()][5];
@@ -723,6 +719,7 @@ public void leerProductos(){
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardarDetFact;
     private javax.swing.JButton btnNuevoDetalle;
+    private java.awt.Button button1;
     private javax.swing.JComboBox<String> cbmNumFac;
     private javax.swing.JComboBox<String> cbmProducto;
     private javax.swing.JLabel jLabel1;

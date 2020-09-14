@@ -45,19 +45,9 @@ public class frmCabecera extends javax.swing.JFrame {
                 } catch (IOException e) {
                 }
     }
-    public void leerClientes(){
-           
+    public void leerClientes(){           
                    
                     cmbClientesCab.removeAllItems();
-                    // for(int i=cmbClientesCab.getItemCount()-1;i>=0;i--){
-                    //     cmbClientesCab.removeItemAt(i);
-                    // }
-                    // while ((linea = br.readLine()) != null) {                
-                    
-                    //         cmbClientesCab.addItem(linea);
-                    
-                    // }
-                    
                 
     }
 
@@ -111,6 +101,7 @@ public class frmCabecera extends javax.swing.JFrame {
         jtblProducto = new javax.swing.JTable();
         btnAgregarCabec = new javax.swing.JButton();
         btnNuevaCabecera = new javax.swing.JButton();
+        button1 = new java.awt.Button();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
@@ -217,6 +208,13 @@ public class frmCabecera extends javax.swing.JFrame {
         btnNuevaCabecera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevaCabeceraActionPerformed(evt);
+            }
+        });
+
+        button1.setLabel("Buscar");
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
             }
         });
 
@@ -348,7 +346,10 @@ public class frmCabecera extends javax.swing.JFrame {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(txtFecha, javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(txtNumFact, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
-                                        .addComponent(cmbClientesCab, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(cmbClientesCab, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(19, 19, 19)
+                                            .addComponent(button1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                     .addGap(24, 24, 24)
                                     .addComponent(btnAgregarCabec))
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -370,11 +371,13 @@ public class frmCabecera extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(cmbClientesCab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAgregarCabec))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(cmbClientesCab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAgregarCabec))
+                    .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
@@ -390,9 +393,9 @@ public class frmCabecera extends javax.swing.JFrame {
 
     
     private void cmbClientesCabActionPerformed(java.awt.event.ActionEvent evt) {        
-        JTextComponent editor = (JTextComponent) cmbClientesCab.getEditor().getEditorComponent();
-        System.out.println(editor.getText());
-        this.leerClientes(editor.getText());
+        // JTextComponent editor = (JTextComponent) cmbClientesCab.getEditor().getEditorComponent();
+        // System.out.println(editor.getText());
+        // this.leerClientes(editor.getText());
     }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -517,6 +520,13 @@ public class frmCabecera extends javax.swing.JFrame {
          limpiar();
         
     }//GEN-LAST:event_btnNuevaCabeceraActionPerformed
+
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        // TODO add your handling code here:
+        JTextComponent editor = (JTextComponent) cmbClientesCab.getEditor().getEditorComponent();
+        System.out.println(editor.getText());
+        this.leerClientes(editor.getText());
+    }//GEN-LAST:event_button1ActionPerformed
     
     public void limpiar(){
         txtNumFact.setText("");
@@ -670,6 +680,7 @@ public class frmCabecera extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregarCabec;
     private javax.swing.JButton btnGuardarCabecera;
     private javax.swing.JButton btnNuevaCabecera;
+    private java.awt.Button button1;
     private javax.swing.JComboBox<String> cmbClientesCab;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
