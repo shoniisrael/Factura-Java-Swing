@@ -429,10 +429,9 @@ public class frmDetalleFactura extends javax.swing.JFrame {
         System.exit(WIDTH);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void btnGuardarDetFactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarDetFactActionPerformed
-         
+    private void btnGuardarDetFactActionPerformed(java.awt.event.ActionEvent evt) {
             detalleFactura aux;
-            for (int i = 0; i < lstDetalleFact.size(); i++) {
+        for (int i = 0; i < lstDetalleFact.size(); i++) {
                 aux = lstDetalleFact.get(i);
                 String producto=aux.getProducto();
                 int cat_producto=aux.getCantidadVenta();
@@ -451,37 +450,39 @@ public class frmDetalleFactura extends javax.swing.JFrame {
                     int intIndex =0;
                     
                     String s2 ="";
-                    String[] aux_producto=producto.split("\\|",3);     
-                    System.out.println(aux_producto[0]);
+                    String[] aux_producto=producto.split("\\|",3);
+                    String mi_aux=aux_producto[0].trim();
                     while ((linea = br.readLine()) != null) {  
-                        String[]  aux_linea=linea.split("\\|",6);     
-                        System.out.println(aux_linea[1]);
-                        if(aux_linea[1].replace(" ","")==aux_producto[0].replace(" ","")){
+                        String[]  aux_linea=linea.split("\\|",5);     
+                        String mi_aux2=aux_linea[1].trim();
+                        System.out.println(mi_aux+"--"+mi_aux2);
+                        if(mi_aux.equals(mi_aux2)){
                             System.out.println("se encontro producto");
-                        }
-                       
-        
-                    }
-                    
-                           
+                            float prod=(float)cat_producto;
+                            float prod2=Float.parseFloat(aux_linea[3].trim());
+                            System.out.println(prod+"--"+prod2);
+                            if(prod2>prod){
+                                float resta=prod2-prod;
+                                System.out.println(aux_linea[1]+"stock restante"+resta);
+                            }else{
+                                System.out.println(aux_linea[1]+"no alcanza el stock");
+                                JOptionPane.showMessageDialog(null,aux_linea[1]+"no alcanza el stock");
+                            }
+                        }       
+                    }                           
                 } catch (IOException e) {
                 }
-
-
-
-
-
-
-
         }
         try {
-            guardarDetFactEnArchPlano();
-            guardDetFactHorizArchPlano();
-            JOptionPane.showMessageDialog(null, "Clientes guardados en la DB");
+           guardarDetFactEnArchPlano();
+           guardDetFactHorizArchPlano();
+           JOptionPane.showMessageDialog(null, "Clientes guardados en la DB");
+           btnNuevoDetalle.setEnabled(false);
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ocurrió un error en la grabación del txt");
         }
-    }//GEN-LAST:event_btnGuardarDetFactActionPerformed
+    }                                                 
 
     private void btnAgregarDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDetalleActionPerformed
         
@@ -682,6 +683,8 @@ public class frmDetalleFactura extends javax.swing.JFrame {
         txtCantidad.setText("");
         txtPrecioFinal.setText("");
     }
+        
+  
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
