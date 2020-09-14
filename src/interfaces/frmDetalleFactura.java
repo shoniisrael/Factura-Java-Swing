@@ -474,11 +474,10 @@ public class frmDetalleFactura extends javax.swing.JFrame {
                 }
         }
         try {
-           guardarDetFactEnArchPlano();
-           guardDetFactHorizArchPlano();
-           JOptionPane.showMessageDialog(null, "Clientes guardados en la DB");
-           btnNuevoDetalle.setEnabled(false);
-
+            guardarDetFactEnArchPlano();
+            guardDetFactHorizArchPlano();
+            JOptionPane.showMessageDialog(null, "Clientes guardados en la DB");           
+            btnNuevoDetalle.setEnabled(false);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ocurrió un error en la grabación del txt");
         }
