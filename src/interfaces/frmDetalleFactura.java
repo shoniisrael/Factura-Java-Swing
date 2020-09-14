@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.text.JTextComponent;
 
 public class frmDetalleFactura extends javax.swing.JFrame {
@@ -431,6 +433,7 @@ public class frmDetalleFactura extends javax.swing.JFrame {
 
     private void btnGuardarDetFactActionPerformed(java.awt.event.ActionEvent evt) {
             detalleFactura aux;
+            boolean error=false;
         for (int i = 0; i < lstDetalleFact.size(); i++) {
                 aux = lstDetalleFact.get(i);
                 String producto=aux.getProducto();
@@ -467,6 +470,7 @@ public class frmDetalleFactura extends javax.swing.JFrame {
                             }else{
                                 System.out.println(aux_linea[1]+"no alcanza el stock");
                                 JOptionPane.showMessageDialog(null,aux_linea[1]+"no alcanza el stock");
+                                error=true;
                             }
                         }       
                     }                           
@@ -474,10 +478,15 @@ public class frmDetalleFactura extends javax.swing.JFrame {
                 }
         }
         try {
-            guardarDetFactEnArchPlano();
-            guardDetFactHorizArchPlano();
-            JOptionPane.showMessageDialog(null, "Clientes guardados en la DB");           
-            btnNuevoDetalle.setEnabled(false);
+            if(!error){               
+                guardarDetFactEnArchPlano();
+                guardDetFactHorizArchPlano();
+                JOptionPane.showMessageDialog(null, "Clientes guardados en la DB");           
+                btnNuevoDetalle.setEnabled(false);
+            }
+            new frmDetalleFactura().setVisible(true);
+                this.dispose();
+          
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ocurrió un error en la grabación del txt");
         }
