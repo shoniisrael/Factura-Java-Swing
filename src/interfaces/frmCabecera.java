@@ -45,12 +45,7 @@ public class frmCabecera extends javax.swing.JFrame {
                 } catch (IOException e) {
                 }
     }
-    public void leerClientes(){           
-                   
-                    cmbClientesCab.removeAllItems();
-                
-    }
-
+   
     public frmCabecera() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -58,7 +53,7 @@ public class frmCabecera extends javax.swing.JFrame {
         //Desactivamos botones 
         btnNuevaCabecera.setEnabled(false);
         btnGuardarCabecera.setEnabled(false);
-        this.leerClientes();
+        this.leerClientes("");
        
         int num_fact=0;
         try {
