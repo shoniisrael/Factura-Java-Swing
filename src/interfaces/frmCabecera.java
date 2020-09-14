@@ -389,32 +389,10 @@ public class frmCabecera extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    private void cmbClientesCabActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        System.out.println(cmbClientesCab.getEditor().toString());
-        
+    private void cmbClientesCabActionPerformed(java.awt.event.ActionEvent evt) {        
         JTextComponent editor = (JTextComponent) cmbClientesCab.getEditor().getEditorComponent();
-        
+        System.out.println(editor.getText());
         this.leerClientes(editor.getText());
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

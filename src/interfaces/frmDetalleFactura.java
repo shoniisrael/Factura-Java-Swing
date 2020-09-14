@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.text.JTextComponent;
 
 public class frmDetalleFactura extends javax.swing.JFrame {
 
@@ -20,7 +21,54 @@ public class frmDetalleFactura extends javax.swing.JFrame {
     private ArrayList<detalleFactura> lstDetalleFact = new ArrayList<detalleFactura>();
     private String ubicacnArchPlano = System.getProperty("user.dir")+"\\DatosAplicacion\\";
     
-    
+    public void leerProductos(String texto){
+        try {
+            //Lectura del archivo plano
+            File archivo_plano = new File (ubicacnArchPlano+"nombresProductos.txt");
+
+            FileReader fr = new FileReader(archivo_plano);
+            
+            //Para leer archivo plano con read line
+            BufferedReader  br = new BufferedReader(fr);
+            cbmProducto.removeAllItems();
+            
+            //Variablr para Lectura Fichero
+            String linea = "";            
+            int intIndex =0;
+            texto = texto.toLowerCase();
+            String s2 ="";
+            
+
+
+            while ((linea = br.readLine()) != null) {    
+                s2 = linea.toLowerCase();            
+                intIndex = s2.indexOf(texto);
+                if(intIndex>=0){
+                    cbmProducto.addItem(linea);
+                }  
+                                       
+            }
+            
+                   
+        } catch (IOException e) {
+        }
+               
+}
+public void leerProductos(){
+       
+               
+    cbmProducto.removeAllItems();
+                // for(int i=cmbClientesCab.getItemCount()-1;i>=0;i--){
+                //     cmbClientesCab.removeItemAt(i);
+                // }
+                // while ((linea = br.readLine()) != null) {                
+                
+                //         cmbClientesCab.addItem(linea);
+                
+                // }
+                
+            
+}
     public frmDetalleFactura() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -34,32 +82,26 @@ public class frmDetalleFactura extends javax.swing.JFrame {
         txtIva.setEnabled(false);
         txtTotal.setEnabled(false);
         
-        
-         try {
+        this.leerProductos();
+        try {
             //Lectura del archivo plano
-            File archivo_plano = new File (ubicacnArchPlano+"nombresProductos.txt");
             File archivo_plano_facts = new File (ubicacnArchPlano+"numerosFacturas.txt");
-
-            FileReader fr = new FileReader(archivo_plano);
             FileReader fr2 = new FileReader(archivo_plano_facts);
             
             //Para leer archivo plano con read line
-            BufferedReader  br = new BufferedReader(fr);
             BufferedReader  br2 = new BufferedReader(fr2);
-            
+            cbmNumFac.removeAllItems();
             //Variablr para Lectura Fichero
             String linea = "";
             
-            //Bucle mientras existan filas sacar datos
-            while ((linea = br.readLine()) != null) {                
-                cbmProducto.addItem(linea);
-            }
+            
             
             while ((linea = br2.readLine()) != null) {                
                 cbmNumFac.addItem(linea);
             }            
         } catch (IOException e) {
         }
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -72,8 +114,8 @@ public class frmDetalleFactura extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtblDetalleFact = new javax.swing.JTable();
-        cbmNumFac = new javax.swing.JComboBox<>();
-        cbmProducto = new javax.swing.JComboBox<>();
+        cbmNumFac = new javax.swing.JComboBox<String>();
+        cbmProducto = new javax.swing.JComboBox<String>();
         txtCantidad = new javax.swing.JTextField();
         btnGuardarDetFact = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
@@ -129,9 +171,15 @@ public class frmDetalleFactura extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jtblDetalleFact);
 
-        cbmNumFac.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una Factura" }));
+        cbmNumFac.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione una Factura" }));
 
-        cbmProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un producto" }));
+        cbmProducto.setEditable(true);
+        cbmProducto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione un producto" }));
+        cbmProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbmProductoActionPerformed(evt);
+            }
+        });
 
         txtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -488,6 +536,12 @@ public class frmDetalleFactura extends javax.swing.JFrame {
         new frmAcercaDe().setVisible(true);
         this.dispose();  
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void cbmProductoActionPerformed(java.awt.event.ActionEvent evt) {  
+        JTextComponent editor = (JTextComponent) cbmProducto.getEditor().getEditorComponent();
+        System.out.println(editor.getText());
+        this.leerProductos(editor.getText());
+    }
 
     private void btnNuevoDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoDetalleActionPerformed
       
