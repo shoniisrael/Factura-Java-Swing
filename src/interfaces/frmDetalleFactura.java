@@ -578,8 +578,9 @@ public class frmDetalleFactura extends javax.swing.JFrame {
 
     private void btnNuevoDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoDetalleActionPerformed
       
-        cbmNumFac.setSelectedIndex(0);
-        cbmNumFac.setEnabled(true);
+        // cbmNumFac.setSelectedIndex(0);
+        cbmNumFac.setEnabled(false);
+        this.leerProductos("");
         cbmProducto.setSelectedIndex(0);
         cbmProducto.setEnabled(true);
         txtCantidad.setEnabled(true);
